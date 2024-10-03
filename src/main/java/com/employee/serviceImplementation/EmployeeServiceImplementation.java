@@ -30,7 +30,7 @@ public class EmployeeServiceImplementation implements EmployeeService{
 
 	@Override
 	public EmployeeDto getById(long id) {
-	    Employee employee=employeeRepo.findById(id).orElseThrow(()->new ResourceNotFoundException ("Employee not exsists with given id :" + id));
+	    Employee employee=employeeRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Employee does not exsists with given id:"+ id));
 		return EmployeeMapper.mapToEmployeeDto(employee);
 	}
 
@@ -42,7 +42,7 @@ public class EmployeeServiceImplementation implements EmployeeService{
 
 	@Override
 	public EmployeeDto updateEmployee(Long id, EmployeeDto employeeDto) {
-    Employee updateEmployee=employeeRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Employee id does not exsists with given id : "+ id));
+    Employee updateEmployee=employeeRepo.findById(id).orElseThrow(()->new  ResourceNotFoundException("Employee id does not exsist"));
 	updateEmployee.setFirstName(updateEmployee.getFirstName());
 	updateEmployee.setLastName(updateEmployee.getLastName());
 	updateEmployee.setEmail(updateEmployee.getEmail());
@@ -51,7 +51,7 @@ public class EmployeeServiceImplementation implements EmployeeService{
 
 	@Override
 	public void deleteEmployee(Long id) {
-		Employee deleteEmployee=employeeRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Employee does not exsists with this id : "+ id));
+	     employeeRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Employee does not exsists with this id : "+ id));
 		employeeRepo.deleteById(id);
 	}
 
